@@ -1,4 +1,11 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  BeforeSave,
+} from 'sequelize-typescript';
+import * as bcrypt from 'bcrypt';
 
 @Table
 export class User extends Model {
@@ -6,18 +13,25 @@ export class User extends Model {
     allowNull: false,
     type: DataType.STRING,
   })
-  name: string;
+  declare name: string;
 
   @Column({
     allowNull: false,
     unique: true,
     type: DataType.STRING,
   })
-  email: string;
+  declare email: string;
 
   @Column({
     allowNull: false,
     type: DataType.STRING,
   })
-  password: string;
+  declare password: string;
+
+  @BeforeSave
+  static async hashPassword(user: User) {
+    if (user.isNewRecord || user.changed('password')) {
+      user.password = await bcrypt.hash(user.password.toString(), 10);
+    }
+  }
 }
