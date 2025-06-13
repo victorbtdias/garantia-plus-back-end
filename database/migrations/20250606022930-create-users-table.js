@@ -22,6 +22,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
       },
+      reset_token: {
+        type: Sequelize.DataTypes.STRING,
+      },
+      reset_token_expires_at: {
+        type: Sequelize.DataTypes.DATE,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,
