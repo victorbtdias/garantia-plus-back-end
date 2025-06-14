@@ -22,6 +22,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
       },
+      role: {
+        allowNull: false,
+        type: Sequelize.DataTypes.STRING,
+      },
       reset_token: {
         type: Sequelize.DataTypes.STRING,
       },

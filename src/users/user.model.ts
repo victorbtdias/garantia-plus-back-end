@@ -8,6 +8,7 @@ import {
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 import { Product } from 'src/products/product.model';
+import { Role } from 'src/common/enums/role.enum';
 
 @Table
 export class User extends Model {
@@ -19,6 +20,12 @@ export class User extends Model {
 
   @Column({ allowNull: false, type: DataType.STRING })
   declare password: string;
+
+  @Column({
+    type: DataType.ENUM(...Object.values(Role)),
+    defaultValue: Role.USER,
+  })
+  declare role: Role;
 
   @Column(DataType.STRING)
   declare resetToken: string | null;
