@@ -4,8 +4,10 @@ import {
   Model,
   DataType,
   BeforeSave,
+  HasMany,
 } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
+import { Product } from 'src/products/product.model';
 
 @Table
 export class User extends Model {
@@ -34,4 +36,7 @@ export class User extends Model {
   async checkPassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }
+
+  @HasMany(() => Product)
+  products: Product[];
 }
