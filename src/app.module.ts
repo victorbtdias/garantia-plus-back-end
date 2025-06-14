@@ -16,6 +16,9 @@ import { ProductsModule } from './products/products.module';
       database: process.env.DATABASE_NAME,
       autoLoadModels: true,
       synchronize: true,
+      define: {
+        underscored: true,
+      },
     }),
     UsersModule,
     AuthModule,
