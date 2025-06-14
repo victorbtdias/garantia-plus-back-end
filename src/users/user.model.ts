@@ -20,10 +20,10 @@ export class User extends Model {
   @Column({ allowNull: false, type: DataType.STRING })
   declare password: string;
 
-  @Column({ type: DataType.STRING })
+  @Column(DataType.STRING)
   declare resetToken: string | null;
 
-  @Column({ type: DataType.DATE })
+  @Column(DataType.DATE)
   declare resetTokenExpiresAt: Date | null;
 
   @BeforeSave
