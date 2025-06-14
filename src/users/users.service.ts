@@ -24,9 +24,7 @@ export class UsersService {
       where: { email: data.email },
     });
 
-    if (userExists) {
-      throw new ConflictException('E-mail já está em uso');
-    }
+    if (userExists) throw new ConflictException('E-mail já está em uso');
 
     return this.userModel.create({ ...data });
   }
@@ -38,9 +36,7 @@ export class UsersService {
   async findById(id: number): Promise<User> {
     const user = await this.userModel.findByPk(id);
 
-    if (!user) {
-      throw new NotFoundException('Usuário não encontrado');
-    }
+    if (!user) throw new NotFoundException('Usuário não encontrado');
 
     return user;
   }
@@ -53,6 +49,7 @@ export class UsersService {
   }
 
   async remove(id: number): Promise<void> {
-    await this.userModel.destroy({ where: { id } });
+    const user = await this.findById(id);
+    await user.destroy();
   }
 }
